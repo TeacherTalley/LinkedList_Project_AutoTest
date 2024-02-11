@@ -1,6 +1,5 @@
 #!/bin/bash
 pip install cpplint
-cd LinkedList_Project
 
 srcfiles="main.cpp"
 echo "Source files:" $srcfiles
