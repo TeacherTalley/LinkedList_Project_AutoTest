@@ -1,4 +1,9 @@
 #!/bin/bash
+#--------------------------------------------------------------------------
+# File: AutoTest_setup.sh
+# Programmer: Michelle Talley
+# Copyright 2024 Michelle Talley University of Central Arkansas
+#--------------------------------------------------------------------------
 echo
 echo "#################### START: AutoTest Setup #####################"
 echo

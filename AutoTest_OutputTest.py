@@ -2,7 +2,7 @@
 #--------------------------------------------------------------------------
 # File: AutoTest_OutputTest.py
 # Programmer: Michelle Talley
-# Copyright: 2024
+# Copyright 2024 Michelle Talley University of Central Arkansas
 #--------------------------------------------------------------------------
 import sys
 import os
@@ -20,9 +20,12 @@ TEST_CASES = ['test_missing_file', 'test_main_output', 'test_output_file']
 #--------------------------------------------------------------------------
 # Global variables - modify as needed
 #--------------------------------------------------------------------------
-TEST_DIR = 'build'
+PARENT_PROJECT = '../..'
+PROJECT = 'LinkedList_Project_AutoTest'
+BUILD = 'build'
+TEST_DIR = os.path.join(PROJECT, BUILD)
 EXECUTABLE = './main'
-DIFF = 'diff'
+DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --suppress-common-lines --color=always'
 
 DATA_DIR = '..'
 TESTDATAFILES = ['AutoTest_mymovies.txt', 'AutoTest_add_movies.txt', 'AutoTest_del_movies.txt']
@@ -77,7 +80,7 @@ def cleanup(args):
     cwd = os.getcwd()
     if cwd.endswith(TEST_DIR):
         try:
-            os.chdir('..')
+            os.chdir(PARENT_PROJECT)
         except:
             print(f'ERROR: Unable to change directory to: {".."}')
             sys.exit(1)
