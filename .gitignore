@@ -3,6 +3,26 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Visual Studio Code (Windows)
+*.exe
+*.ilk
+*.obj
+*.pdb
+*.dSYM*
+*.sln
+*.vcxproj*
+x64
+.vs*
+
+# Visual Studio Project files
+Project*
+project*
+
+# VS Code
+.vscode
+/.DS_Store
+*.dsym
+
 # VS Code ignores
 .vscode
 *.dSYM
@@ -17,5 +37,8 @@ main
 
 # copied student files need to be ignored
 main.cpp
+*.h
 
+# Ignore local testing directory
+local_testing
 
