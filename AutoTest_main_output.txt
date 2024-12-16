@@ -3,6 +3,6 @@ Adding new movies...
 Movie Little Rita nel West cannot be added to the list.
 Movie Chichi Ariki cannot be added to the list.
 Removing movies...
-Movie Arthur et la vengeance de Maltazard cannot be removed from list.
-Movie Zhit cannot be removed from list.
+Movie Arthur et la vengeance de Maltazard cannot be removed from the list.
+Movie Zhit cannot be removed from the list.
 New movie list ready!
