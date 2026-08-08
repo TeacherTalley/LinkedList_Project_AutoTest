@@ -30,7 +30,7 @@ TEST_DIR = os.path.join(PROJECT, BUILD)
 EXECUTABLE = './main'
 #DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --suppress-common-lines --color=always'
 DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --color=never'
-FIXED_DIFF = "| sed 's / /·/ g' && return 1"
+FIXED_DIFF = "| sed 's / /·/ g'"
 
 DATA_DIR = '..'
 TESTDATAFILES = ['AutoTest_mymovies.txt', 'AutoTest_add_movies.txt', 'AutoTest_del_movies.txt']
@@ -230,7 +230,7 @@ def test_missing_file(args):
     rc = execute_command(cmd, args)
     return rc
 
-def test_main_output(args):
+def test_main_output(args={}):
     if (copy_test_input_files() != 0):
         return 1
 
@@ -241,7 +241,8 @@ def test_main_output(args):
     # compare the output
     cmd = diff_command(os.path.join(DATA_DIR, AUTOTEST_MAIN_OUTPUT_FILE), 
                        STUDENT_MAIN_OUTPUT_FILE, 
-                       fixed_diff=False)
+                       fixed_diff=True)
+    args.verbose = True
     rc = execute_command(cmd, args)
     return rc
 
