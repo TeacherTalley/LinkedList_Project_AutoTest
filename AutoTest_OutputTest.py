@@ -29,8 +29,8 @@ BUILD = 'build'
 TEST_DIR = os.path.join(PROJECT, BUILD)
 EXECUTABLE = './main'
 #DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --suppress-common-lines --color=always'
-# DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --color=never'
-DIFF = 'diff --ignore-case --ignore-blank-lines --ignore-space-change  --color=never'
+DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --color=never'
+#DIFF = 'diff --ignore-case --ignore-blank-lines --ignore-space-change  --color=never'
 FIXED_DIFF = "sed 's / /·/ g'"
 
 DATA_DIR = '..'
