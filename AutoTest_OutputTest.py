@@ -10,6 +10,9 @@ import subprocess
 import shutil
 import argparse
 
+# Enable or disable color output in the terminal.
+USE_COLOR = False
+
 
 #--------------------------------------------------------------------------
 # list all test cases to be executed here - modify as needed
@@ -47,10 +50,16 @@ AUTOTEST_DEL_MOVIES_FILE = 'AutoTest_del_movies.txt'
 #--------------------------------------------------------------------------
 # Font colors for terminal output
 #--------------------------------------------------------------------------
-BLUE = '\033[34m'
-RED = '\033[31m'
-GREEN = '\033[32m'
-RESET = '\033[0m'
+if USE_COLOR:
+    BLUE = '\033[34m'
+    RED = '\033[31m'
+    GREEN = '\033[32m'
+    RESET = '\033[0m'
+else:
+    BLUE = ''
+    RED = ''
+    GREEN = ''
+    RESET = ''
 
 
 def report_failure(msg):
@@ -62,7 +71,7 @@ def report_failure(msg):
          None
     """
     print(f'{RED}[----------]{RESET}')
-    print(f'{RED}[  FAILED  ] {msg}{RESET}')
+    print(f'{RED}[ ❌ FAILED ] {msg}{RESET}')
     print(f'{RED}[----------]{RESET}')
     return
 
@@ -75,7 +84,7 @@ def report_success(msg):
          None
     """
     print(f'{GREEN}[----------]{RESET}')
-    print(f'{GREEN}[  PASSED  ] {msg}{RESET}')
+    print(f'{GREEN}[ ✅ PASSED ] {msg}{RESET}')
     print(f'{GREEN}[----------]{RESET}')
     return
 
@@ -112,20 +121,18 @@ def execute_command(cmd, args=None, accept_rc=[0]):
     - If `args.verbose` is True, prints the result of the command execution, including specific messages for segmentation faults (rc=139) and uncaught exceptions (rc=134).
     """
     rc = 0
+    verbose = bool(getattr(args, 'verbose', False))
+    debug = bool(getattr(args, 'debug', False))
 
-    if not args:
-        args.verbose = False
-        args.debug = False
-
-    if args.verbose:
+    if verbose:
         print(f'{GREEN}[==========]{RESET}')
         print(f'{GREEN}[ EXECUTE  ] {cmd}{RESET}')
         print(f'{GREEN}[==========]{RESET}')
 
-    if not args.debug:
+    if not debug:
         rc = subprocess.call(cmd, shell=True)
 
-    if args.verbose:
+    if verbose:
         if rc == 139:
             report_failure('Segmentation Fault')
         elif rc == 134:
@@ -361,6 +368,7 @@ def parse_arguments():
 
 def test_main():
     args = parse_arguments()
+    rc = 0
 
     if args.quiet:
         args.verbose = False
