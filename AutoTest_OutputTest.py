@@ -117,7 +117,7 @@ def diff_command(file1, file2, fixed_diff=True):
     """
     cmd = f'{DIFF} {file1} {file2}'
     if fixed_diff:
-        cmd = cmd + f' | {FIXED_DIFF}' + '; exit ${PIPESTATUS[0]}; exit $rc'
+        cmd = 'rc=$(' + cmd + f' | {FIXED_DIFF}' + '; exit ${PIPESTATUS[0]}); exit $rc'
 #        return f'rc = $({DIFF} {FIXED_DIFF}; exit ${PIPESTATUS[0]}); exit $rc'
         print(f'Crazy diff command: {cmd}')
         return cmd
