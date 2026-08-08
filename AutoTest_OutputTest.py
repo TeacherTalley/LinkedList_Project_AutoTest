@@ -244,6 +244,7 @@ def test_main_output(args={}):
                        fixed_diff=True)
     args.verbose = True
     rc = execute_command(cmd, args)
+    rc = 1
     return rc
 
 def test_output_file(args):
