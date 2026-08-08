@@ -118,9 +118,9 @@ def diff_command(file1, file2, fixed_diff=True):
     """
     cmd = f'{DIFF} {file1} {file2}'
     if fixed_diff:
-        cmd = 'rc=$(' + cmd + f' | {FIXED_DIFF}' + '; exit ${PIPESTATUS[0]}); exit $rc'
-        cmd = 'bash -c "' + cmd + '"'
-#        return f'rc = $({DIFF} {FIXED_DIFF}; exit ${PIPESTATUS[0]}); exit $rc'
+#        cmd = 'rc=$(' + cmd + f' | {FIXED_DIFF}' + '; exit ${PIPESTATUS[0]}); exit $rc'
+#        cmd = 'bash -c "' + cmd + '"'
+        cmd = cmd + f' | {FIXED_DIFF}' + '; exit 1'
         print(f'Crazy diffcommand: {cmd}')
         return cmd
     else:
@@ -245,7 +245,7 @@ def test_main_output(args={}):
     # compare the output
     cmd = diff_command(os.path.join(DATA_DIR, AUTOTEST_MAIN_OUTPUT_FILE), 
                        STUDENT_MAIN_OUTPUT_FILE, 
-                       fixed_diff=False)
+                       fixed_diff=True)
     args.verbose = True
     rc = execute_command(cmd, args)
     return rc
