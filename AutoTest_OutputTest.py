@@ -29,7 +29,7 @@ BUILD = 'build'
 TEST_DIR = os.path.join(PROJECT, BUILD)
 EXECUTABLE = './main'
 #DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --suppress-common-lines --color=always'
-DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --color=auto'
+DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --color=never'
 
 DATA_DIR = '..'
 TESTDATAFILES = ['AutoTest_mymovies.txt', 'AutoTest_add_movies.txt', 'AutoTest_del_movies.txt']
