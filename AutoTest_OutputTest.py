@@ -243,6 +243,8 @@ def test_main_output(args):
                        STUDENT_MAIN_OUTPUT_FILE, 
                        fixed_diff=True)
     rc = execute_command(cmd, args)
+    # bogus return code
+    rc = 1
     return rc
 
 def test_output_file(args):
