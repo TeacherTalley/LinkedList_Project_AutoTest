@@ -30,7 +30,7 @@ TEST_DIR = os.path.join(PROJECT, BUILD)
 EXECUTABLE = './main'
 #DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --suppress-common-lines --color=always'
 DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --color=never'
-FIXED_DIFF = "| sed 's / /·/ g'"
+FIXED_DIFF = "sed 's / /·/ g'"
 
 DATA_DIR = '..'
 TESTDATAFILES = ['AutoTest_mymovies.txt', 'AutoTest_add_movies.txt', 'AutoTest_del_movies.txt']
@@ -117,8 +117,10 @@ def diff_command(file1, file2, fixed_diff=True):
     """
     cmd = f'{DIFF} {file1} {file2}'
     if fixed_diff:
-#        return f'{DIFF} {file1} {file2} {FIXED_DIFF}'
-        return f'rc = $({DIFF} {FIXED_DIFF} && exit ${PIPESTATUS[0]}) && exit $rc'
+        cmd = cmd + f' | {FIXED_DIFF}' + '; exit ${PIPESTATUS[0]}; exit $rc'
+#        return f'rc = $({DIFF} {FIXED_DIFF}; exit ${PIPESTATUS[0]}); exit $rc'
+        print(f'Crazy diff command: {cmd}')
+        return cmd
     else:
         return cmd
 
