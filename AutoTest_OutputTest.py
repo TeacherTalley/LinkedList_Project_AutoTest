@@ -30,8 +30,6 @@ TEST_DIR = os.path.join(PROJECT, BUILD)
 EXECUTABLE = './main'
 #DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --suppress-common-lines --color=always'
 DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --color=never'
-#DIFF = 'diff --ignore-case --ignore-blank-lines --ignore-space-change  --color=never'
-FIXED_DIFF = "sed 's/ /·/ g'"
 
 DATA_DIR = '..'
 TESTDATAFILES = ['AutoTest_mymovies.txt', 'AutoTest_add_movies.txt', 'AutoTest_del_movies.txt']
@@ -107,24 +105,16 @@ def report_info(msg, color=RESET):
 #--------------------------------------------------------------------------
 # Helper functions
 #--------------------------------------------------------------------------
-def diff_command(file1, file2, fixed_diff=True):
+def diff_command(file1, file2):
     """
-    Constructs a diff command to compare two files, with optional color output.
+    Constructs a diff command to compare two files
     Parameters:
          file1 (str): The first file to compare.
          file2 (str): The second file to compare.
     Returns:
          str: The constructed diff command.
     """
-    cmd = f'{DIFF} {file1} {file2}'
-    if fixed_diff:
-#        cmd = 'rc=$(' + cmd + f' | {FIXED_DIFF}' + '; exit ${PIPESTATUS[0]}); exit $rc'
-#        cmd = 'bash -c "' + cmd + '"'
-        cmd = cmd + f' | {FIXED_DIFF}' + '; exit 1'
-        print(f'Crazy diffcommand: {cmd}')
-        return cmd
-    else:
-        return cmd
+    return f'{DIFF} {file1} {file2}'
 
 
 def execute_command(cmd, args=None, accept_rc=[0]):
@@ -229,8 +219,7 @@ def test_missing_file(args):
 
     # compare the output
     cmd = diff_command(os.path.join(DATA_DIR, AUTOTEST_MAIN_MISSING_FILE), 
-                       STUDENT_MAIN_MISSING_FILE, 
-                       fixed_diff=False)
+                       STUDENT_MAIN_MISSING_FILE)
     rc = execute_command(cmd, args)
     return rc
 
@@ -244,8 +233,7 @@ def test_main_output(args={}):
 
     # compare the output
     cmd = diff_command(os.path.join(DATA_DIR, AUTOTEST_MAIN_OUTPUT_FILE), 
-                       STUDENT_MAIN_OUTPUT_FILE, 
-                       fixed_diff=True)
+                       STUDENT_MAIN_OUTPUT_FILE)
     args.verbose = True
     rc = execute_command(cmd, args)
     return rc
@@ -264,8 +252,7 @@ def test_output_file(args):
 
     # compare the output
     cmd = diff_command(os.path.join(DATA_DIR, AUTOTEST_MOVIE_UPDATE_FILE), 
-                       STUDENT_MOVIE_UPDATE_FILE, 
-                       fixed_diff=False)
+                       STUDENT_MOVIE_UPDATE_FILE)
     rc = execute_command(cmd, args)
     return rc
 
