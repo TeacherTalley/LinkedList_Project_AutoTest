@@ -29,7 +29,8 @@ BUILD = 'build'
 TEST_DIR = os.path.join(PROJECT, BUILD)
 EXECUTABLE = './main'
 #DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --suppress-common-lines --color=always'
-DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --color=never'
+# DIFF = 'diff --ignore-case --ignore-blank-lines --side-by-side  --ignore-space-change  --color=never'
+DIFF = 'diff --ignore-case --ignore-blank-lines --ignore-space-change  --color=never'
 FIXED_DIFF = "sed 's / /·/ g'"
 
 DATA_DIR = '..'
@@ -244,10 +245,9 @@ def test_main_output(args={}):
     # compare the output
     cmd = diff_command(os.path.join(DATA_DIR, AUTOTEST_MAIN_OUTPUT_FILE), 
                        STUDENT_MAIN_OUTPUT_FILE, 
-                       fixed_diff=True)
+                       fixed_diff=False)
     args.verbose = True
     rc = execute_command(cmd, args)
-    rc = 1
     return rc
 
 def test_output_file(args):
