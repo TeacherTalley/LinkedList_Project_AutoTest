@@ -226,7 +226,7 @@ def test_missing_file(args):
     # compare the output
     cmd = diff_command(os.path.join(DATA_DIR, AUTOTEST_MAIN_MISSING_FILE), 
                        STUDENT_MAIN_MISSING_FILE, 
-                       fixed_diff=True)
+                       fixed_diff=False)
     rc = execute_command(cmd, args)
     return rc
 
@@ -241,10 +241,8 @@ def test_main_output(args):
     # compare the output
     cmd = diff_command(os.path.join(DATA_DIR, AUTOTEST_MAIN_OUTPUT_FILE), 
                        STUDENT_MAIN_OUTPUT_FILE, 
-                       fixed_diff=True)
+                       fixed_diff=False)
     rc = execute_command(cmd, args)
-    # bogus return code
-    rc = 1
     return rc
 
 def test_output_file(args):
@@ -262,7 +260,7 @@ def test_output_file(args):
     # compare the output
     cmd = diff_command(os.path.join(DATA_DIR, AUTOTEST_MOVIE_UPDATE_FILE), 
                        STUDENT_MOVIE_UPDATE_FILE, 
-                       fixed_diff=True)
+                       fixed_diff=False)
     rc = execute_command(cmd, args)
     return rc
 
